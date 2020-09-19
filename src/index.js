@@ -14,12 +14,12 @@ const counterReducer = (state = {
       return {...state, neutral: state.neutral + 1}
     case 'BAD':
       return {...state, bad: state.bad + 1}
-    case 'RESET':
-      return {...state, good:0, bad:0, neutral: 0}
     case 'TOTAL':
       return {...state, total: (state.good + state.bad + state.neutral)}
     case 'AVERAGE':
-        return {...state, average: (state.good - state.bad + 0 * state.neutral)/(state.good + state.bad + state.neutral)}
+        return {...state, average: ((state.good - state.bad)/(state.good + state.neutral + state.bad))}
+    case 'RESET':
+      return {...state, good:0, bad:0, neutral: 0, total: 0, average: 0}
     default:
     return state
   }
@@ -45,12 +45,6 @@ const App = () => {
     store.dispatch({
       type: 'BAD'
     })
-  }
-  //reset
-  const reset = () => {
-    store.dispatch({
-      type: 'RESET'
-    })  
   }  
   //total
   const total = () => {
@@ -64,6 +58,12 @@ const App = () => {
       type: 'AVERAGE'
     })  
   }
+    //reset
+    const reset = () => {
+      store.dispatch({
+        type: 'RESET'
+      })  
+    }
   
 
   return (
@@ -71,14 +71,14 @@ const App = () => {
       <button onClick={good}>good</button> 
       <button onClick={neutral}>neutral</button> 
       <button onClick={bad}>bad</button>
-      <button onClick={reset}>reset stats</button>
       <button onClick={total}>total</button>
       <button onClick={average}>average</button>
+      <button onClick={reset}>reset stats</button>
       <div>good {store.getState().good}</div>
       <div>neutral {store.getState().neutral}</div>
       <div>bad {store.getState().bad}</div>
       <div>Total votes: {store.getState().total}</div>
-      <div>Average votes: {store.getState().average}</div>
+      <div>Average score: {store.getState().average}</div>
     </div>
   )
 }
