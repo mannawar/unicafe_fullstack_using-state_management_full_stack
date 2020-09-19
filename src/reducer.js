@@ -5,11 +5,6 @@ const initialState = {
 }
 
 const counterReducer = (state = initialState, action) => {
-  // if(action.type === 'ACTUAL_FEEDBACK') {
-  //   state.concat(action.feedback)
-  //   return state
-  // }
-
   console.log(action)
   switch (action.type) {
     case 'GOOD':
@@ -24,16 +19,5 @@ const counterReducer = (state = initialState, action) => {
   }
   
 }
-
-// const store = createStore(counterReducer)
-
-// store.dispatch({
-//   type: 'ACTUAL_FEEDBACK',
-//   feedback: {
-//     good: 5,
-//     ok: 4,
-//     bad: 2
-//   }
-// })
 
 export default counterReducer
