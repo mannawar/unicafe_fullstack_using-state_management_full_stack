@@ -43,16 +43,16 @@ router.get("/getData", async (req,res) => {
 router.post("/putData", (req, res) => {
     let feed = new Feed();
 
-    let { Good, Neutral, Bad, Total, Average, reset } = req.body;
-    if((Good && Neutral) || (Neutral && Bad) || (Neutral && Good) || (Neutral && Bad && Good)) {
+    let { good, neutral, bad, Total, Average, reset } = req.body;
+    if((good && neutral) || (neutral && bad) || (neutral && good) || (neutral && bad && good)) {
         return res.json({ Success: false, Message: "Please encode only one feedback"})
     }
 
-    feed.Good = Good
-    feed.Bad = Bad
-    feed.Neutral = Neutral
-    feed.Total = feed.Good + feed.Bad + feed.Neutral
-    feed.Average = ((Good - Bad)/(Good + Bad + Neutral))
+    feed.good = good
+    feed.bad = bad
+    feed.neutral = neutral
+    feed.Total = feed.good + feed.bad + feed.neutral
+    feed.Average = ((good - bad)/(good + bad + neutral))
     feed.save(err => {
         if(err) return res.json({ Success: false, Error: err})
         return res.json({ Success: true })

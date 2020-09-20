@@ -1,23 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
+import axios from 'axios';
 
-const counterReducer = (state = {
-  good: 0,
-  neutral: 0,
-  bad: 0, total: 0, average: 0 
-}, action) => {
+const counterReducer = (state = 
+  axios.get('http://localhost:3001/api/getData')
+  .then((res) => {return res.data.feed[8]})
+, action) => {
+  console.log((state));
   switch (action.type) {
     case 'GOOD':
-      return {...state, good: state.good + 1}
+      return {...state, Good: state.Good + 1}
     case 'NEUTRAL':
-      return {...state, neutral: state.neutral + 1}
+      return {...state, neutral: state.Neutral + 1}
     case 'BAD':
-      return {...state, bad: state.bad + 1}
+      return {...state, bad: state.Bad + 1}
     case 'TOTAL':
-      return {...state, total: (state.good + state.bad + state.neutral)}
+      return {...state, total: (state.Good + state.Bad + state.Neutral)}
     case 'AVERAGE':
-        return {...state, average: ((state.good - state.bad)/(state.good + state.neutral + state.bad))}
+        return {...state, average: ((state.Good - state.Bad)/(state.Good + state.Neutral + state.Bad))}
     case 'RESET':
       return {...state, good:0, bad:0, neutral: 0, total: 0, average: 0}
     default:
@@ -75,11 +76,11 @@ const App = () => {
       <button onClick={total}>total</button>
       <button onClick={average}>average</button>
       <button onClick={reset}>reset stats</button>
-      <div>Good: {store.getState().good}</div>
-      <div>Neutral: {store.getState().neutral}</div>
-      <div>Bad: {store.getState().bad}</div>
-      <div>Total: {store.getState().total}</div>
-      <div>Average: {store.getState().average}</div>
+      <div>Good: {store.getState().Good}</div>
+      <div>Neutral: {store.getState().Neutral}</div>
+      <div>Bad: {store.getState().Bad}</div>
+      <div>Total: {store.getState().Total}</div>
+      <div>Average: {store.getState().Average}</div>
     </div>
   )
 }
