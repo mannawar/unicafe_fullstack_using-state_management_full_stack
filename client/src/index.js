@@ -68,17 +68,18 @@ const App = () => {
 
   return (
     <div>
+      <h2>Please leave your feedback here</h2>
       <button onClick={good}>good</button> 
       <button onClick={neutral}>neutral</button> 
       <button onClick={bad}>bad</button>
       <button onClick={total}>total</button>
       <button onClick={average}>average</button>
       <button onClick={reset}>reset stats</button>
-      <div>good {store.getState().good}</div>
-      <div>neutral {store.getState().neutral}</div>
-      <div>bad {store.getState().bad}</div>
-      <div>Total votes: {store.getState().total}</div>
-      <div>Average score: {store.getState().average}</div>
+      <div>Good: {store.getState().good}</div>
+      <div>Neutral: {store.getState().neutral}</div>
+      <div>Bad: {store.getState().bad}</div>
+      <div>Total: {store.getState().total}</div>
+      <div>Average: {store.getState().average}</div>
     </div>
   )
 }
